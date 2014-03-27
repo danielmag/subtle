@@ -1,0 +1,66 @@
+import edu.stanford.nlp.ie.AbstractSequenceClassifier;
+import edu.stanford.nlp.ling.CoreLabel;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Cleaner {
+
+    private boolean tag = false;
+    AbstractSequenceClassifier<CoreLabel> classifier;
+
+
+    public Cleaner(boolean tag, AbstractSequenceClassifier<CoreLabel> classifier) {
+        this.tag = tag;
+        this.classifier = classifier;
+    }
+
+
+    public String clean(String str) {
+
+        // Now create a new pattern and matcher to replace whitespace with tabs
+        Pattern replace = Pattern.compile("(<i>)(.*[^<])(</i>)");
+        Pattern replace1 = Pattern.compile("[ ][ ]*");
+        Pattern replace2 = Pattern.compile("\\.\\s*\\.[\\s*\\.]*");
+        Pattern replace3 = Pattern.compile("\\- \\-");
+        Pattern replace4 = Pattern.compile("</i>");
+        Pattern replace5 = Pattern.compile("<i>");
+        Pattern replace6 = Pattern.compile("</b>");
+        Pattern replace7 = Pattern.compile("<b>");
+        // Pattern nomesProprios = Pattern.compile("([.[^-]]*)([A-Z][a-z]*)");
+
+
+        Matcher matcher2 = replace.matcher(str);
+        String newString = matcher2.replaceAll("$2");
+
+        Matcher matcher5 = replace1.matcher(newString);
+        String newString3 = matcher5.replaceAll(" ");
+
+        Matcher matcher3 = replace2.matcher(newString3);
+        String newString2 = matcher3.replaceAll(" ");
+
+        Matcher matcher1 = replace4.matcher(newString2);
+        String newString4 = matcher1.replaceAll("");
+
+        Matcher matcher4 = replace5.matcher(newString4);
+        String newString5 = matcher4.replaceAll("");
+
+        Matcher matcher6 = replace6.matcher(newString5);
+        String newString6 = matcher6.replaceAll("");
+
+        Matcher matcher7 = replace7.matcher(newString6);
+        String newString7 = matcher7.replaceAll("");
+
+        Matcher matcher8 = replace3.matcher(newString7);
+        String newString8 = matcher8.replaceAll("-");
+
+        if (tag) {
+            String taggedStr = classifier.classifyToString(newString8);
+            return taggedStr;
+        }
+
+        return newString8;
+
+    }
+
+}

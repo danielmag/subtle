@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- Location of subtitle files -->
+    <subtitles>./resources/subtitle-files-eng/unique-subs-chars/</subtitles>
+
+    <!-- Time between subtitles (in milliseconds)-->
+    <timeDiff>0</timeDiff>
+
+    <!-- NER -->
+    <Ner>
+        <!-- Tag with NER -->
+        <toTag>false</toTag>
+        <!-- NER Location -->
+        <serializedClassifier>./bib/stanford-ner-2014-01-04/classifiers/english.all.3class.distsim.crf.ser.gz</serializedClassifier>
+    </Ner>
+</config>
