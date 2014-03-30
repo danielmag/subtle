@@ -142,7 +142,7 @@ public class SubsParser {
                 break;
             }
 
-            if (uter1.endsWithLowerCaseOrDotsOrHyphen() && uter2.beginsWithLowerCaseOrDots()) {
+            if (uter1.hasToBeContinued() || (uter1.endsWithLetter() && uter2.isContinuation())) {
                 uter1.setEndTime(uter2.getEndTime());
                 uter1.addContent(uter2.getFinalContent());
                 sub.remove(i + 1);

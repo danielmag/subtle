@@ -20,29 +20,35 @@ public class Utterance {
         this.endTime.setYear(1970);
     }
 
-    public boolean endsWithLowerCaseOrDotsOrHyphen() {
+    public boolean hasToBeContinued() {
         if (finalContent.length() < 2) {
             return false;
         }
+        String temp = new String(finalContent);
+        temp = temp.replaceAll("\\s", "");
 
-        char lastChar = finalContent.charAt(finalContent.length() - 1);
-
-        return Character.isLowerCase(lastChar) ||
-                finalContent.endsWith(",") ||
-                finalContent.endsWith("..") ||
-                finalContent.endsWith("-");
+        return temp.endsWith(",") ||
+                temp.endsWith("..") ||
+                temp.endsWith("-");
     }
 
-    public boolean beginsWithLowerCaseOrDots() {
+    public boolean endsWithLetter() {
+        String temp = new String(finalContent);
+        temp = temp.replaceAll("\\s", "");
+        return Character.isLetter(temp.charAt(0));
+    }
+
+    public boolean isContinuation() {
         if (finalContent.length() < 2) {
             return false;
         }
+        String temp = new String(finalContent);
+        temp = temp.replaceAll("\\s", "");
 
-        char firstChar = finalContent.charAt(0);
-
+        char firstChar = temp.charAt(0);
         return Character.isLowerCase(firstChar) ||
-                finalContent.startsWith(",") ||
-                finalContent.startsWith("..");
+                temp.startsWith(",") ||
+                temp.startsWith("..");
     }
 
 
