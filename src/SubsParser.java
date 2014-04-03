@@ -142,7 +142,7 @@ public class SubsParser {
                 break;
             }
 
-            if (uter1.hasToBeContinued() || (uter1.endsWithLetter() && uter2.isContinuation())) {
+            if (uter1.hasToBeContinued() || (uter1.endsWithLetterOrEllipsisOrHyphen() && uter2.isContinuation())) {
                 uter1.setEndTime(uter2.getEndTime());
                 uter1.addContent(uter2.getFinalContent());
                 sub.remove(i + 1);
@@ -206,8 +206,8 @@ public class SubsParser {
                 content = "\n" + "SubId - " + sd.getSubtitleFileId() + "\n" +
                         "DialogId - " + sd.getDialogueId() + '\n' +
                         "Diff - " + sd.getTimeBetweenUtterances() + '\n' +
-                        "Q - " + sd.getQuestion() + "\n" +
-                        "A - " + sd.getAnswer() + "\n";
+                        "I - " + sd.getQuestion() + "\n" +
+                        "R - " + sd.getAnswer() + "\n";
                 x.write(content);
 
             }

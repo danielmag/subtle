@@ -21,21 +21,22 @@ public class Utterance {
     }
 
     public boolean hasToBeContinued() {
+        String temp = new String(finalContent);
+        temp = temp.replaceAll("\\s", "");
+
+        return temp.endsWith(",") ||
+                temp.endsWith(":");
+    }
+
+    public boolean endsWithLetterOrEllipsisOrHyphen() { //if you change the function, change name accordingly
         if (finalContent.length() < 2) {
             return false;
         }
         String temp = new String(finalContent);
         temp = temp.replaceAll("\\s", "");
-
-        return temp.endsWith(",") ||
+        return Character.isLetter(temp.charAt(temp.length()-1)) ||
                 temp.endsWith("..") ||
                 temp.endsWith("-");
-    }
-
-    public boolean endsWithLetter() {
-        String temp = new String(finalContent);
-        temp = temp.replaceAll("\\s", "");
-        return Character.isLetter(temp.charAt(0));
     }
 
     public boolean isContinuation() {
