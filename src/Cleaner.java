@@ -21,13 +21,14 @@ public class Cleaner {
         // Now create a new pattern and matcher to replace whitespace with tabs
         Pattern replace = Pattern.compile("(<i>)(.*[^<])(</i>)");
         Pattern replace1 = Pattern.compile("[ ][ ]+");
-        Pattern replace2 = Pattern.compile("\\{\\p{L}.*\\}");
+        Pattern replace2 = Pattern.compile("\\{\\p{L}*\\}");
         Pattern replace3 = Pattern.compile("\\- \\-");
         Pattern replace4 = Pattern.compile("<[/]?[ib]>");
         Pattern replace5 = Pattern.compile("^\\p{Lu}\\p{L}*:");
         Pattern replace6 = Pattern.compile("^\"(.*)\"$");
         Pattern replace7 = Pattern.compile("^'(.*)'$");
-        Pattern replace8 = Pattern.compile(".*[\\p{L}].*");
+        Pattern replace8 = Pattern.compile("^[(\\[]\\p{L}*[)\\]]$");
+        Pattern replace9 = Pattern.compile(".*[\\p{L}].*");
 
         Matcher matcher2 = replace.matcher(str);
         String newString = matcher2.replaceAll("$2");
@@ -54,7 +55,10 @@ public class Cleaner {
         String newString8 = matcher9.replaceAll("$1");
 
         Matcher matcher10 = replace8.matcher(newString8);
-        if (!matcher10.matches()) {
+        String newString9 = matcher10.replaceAll("");
+
+        Matcher matcher11 = replace9.matcher(newString9);
+        if (!matcher11.matches()) {
             return "";
         }
 
