@@ -49,6 +49,7 @@ public class Utterance {
         char firstChar = temp.charAt(0);
         return Character.isLowerCase(firstChar) ||
                 temp.startsWith(",") ||
+                temp.startsWith("I ") ||
                 temp.startsWith("..");
     }
 
